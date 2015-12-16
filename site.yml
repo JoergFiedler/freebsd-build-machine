@@ -1,0 +1,13 @@
+---
+- hosts: default
+  sudo: true
+
+  vars:
+    aws_access_key_id: '{{ lookup("env","AWS_ACCESS_KEY_ID") }}'
+    aws_secret_access_key: '{{ lookup("env","AWS_SECRET_ACCESS_KEY") }}'
+    s3_bucket_name: 'vastland.moumantai.de'
+    poudriere_jails:
+    - { jail_name: 'freebsd-10_2_x64', version: '10.2-RELEASE' }
+
+  roles:
+  - { role: JoergFiedler.freebsd-build-server }
