@@ -1,6 +1,6 @@
 ### FreeBSD Build Server
 
-Creates a FreeBSD server which provides a ready to run `poudriere` installation. See FreeBSD Handbook for further information on how to use `poudriere`.
+Creates a FreeBSD server which provides a ready to run `poudriere` installation. See [FreeBSD Handbook](https://www.freebsd.org/doc/handbook/ports-poudriere.html) for further information on how to use `poudriere`.
 
 [This Ansible role](https://github.com/JoergFiedler/freebsd-build-server) is used to setup the server on EC2 or Virtualbox.
 
@@ -10,6 +10,8 @@ Creates a FreeBSD server which provides a ready to run `poudriere` installation.
     export AWS_SECRET_ACCESS_KEY='your secret'
     export AWS_DEFAULT_REGION='the aws region to use'
 
+    ansible-galaxy install JoergFiedler.freebsd-build-server
+    vagrant plugin install vagrant-aws
     vagrant up --provider aws
 
 
