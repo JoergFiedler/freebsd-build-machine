@@ -20,3 +20,7 @@ Log in with `vagrant ssh`.
     build-port
     upload-to-s3
 
+
+#### Hints
+
+The virtualbox is configured to use 12GB of RAM. Please adapt the value to your requirements.
