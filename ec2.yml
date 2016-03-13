@@ -1,0 +1,6 @@
+---
+# ec2 specific settings
+
+host_sshd_user: 'ec2-user'
+host_ioc_zpool_devices: 'xbd5' # device settings used when creating the pool
+host_srv_zpool_devices: 'xbd5' # device settings used when creating the pool
