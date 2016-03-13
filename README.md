@@ -6,7 +6,7 @@ Creates a FreeBSD server which provides a ready to run `poudriere` installation.
 
 #### Howto
 
-    export ACCESS_KEY_ID='your key'
+    export ACCESS_KEY='your key'
     export SECRET_ACCESS_KEY='your secret'
     export DEFAULT_REGION='the aws region to use'
 
