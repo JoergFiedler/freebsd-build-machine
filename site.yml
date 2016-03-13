@@ -3,13 +3,13 @@
   sudo: true
 
   vars:
-    aws_access_key_id: '{{ lookup("env","AWS_ACCESS_KEY_ID") }}'
-    aws_secret_access_key: '{{ lookup("env","AWS_SECRET_ACCESS_KEY") }}'
-    aws_default_region: '{{ lookup("env","AWS_DEFAULT_REGION") }}'
+    aws_access_key_id: '{{ lookup("env","ACCESS_KEY") }}'
+    aws_secret_access_key: '{{ lookup("env","SECRET_ACCESS_KEY") }}'
+    aws_default_region: '{{ lookup("env","DEFAULT_REGION") }}'
     s3_bucket_name: 'vastland.moumantai.de'
+    poudriere_port_list_file: './files/port-list'
     poudriere_jails:
     - { jail_name: 'freebsd-10_2_x64', version: '10.2-RELEASE' }
-    - { jail_name: 'freebsd-10_1_x64', version: '10.1-RELEASE' }
 
   roles:
   - { role: JoergFiedler.freebsd-build-server }
