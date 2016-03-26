@@ -17,7 +17,7 @@ Creates a FreeBSD server which provides a ready to run `poudriere` installation.
 
 Log in with `vagrant ssh`.
 
-    build-port
+    build-ports
     upload-to-s3
 
 
