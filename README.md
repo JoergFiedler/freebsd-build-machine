@@ -9,6 +9,7 @@ Creates a FreeBSD server which provides a ready to run `poudriere` installation.
     export ACCESS_KEY='your key'
     export SECRET_ACCESS_KEY='your secret'
     export DEFAULT_REGION='the aws region to use'
+    export S3_BUCKET_NAME='the S3 bucket name'
 
     ansible-galaxy install JoergFiedler.freebsd-build-server
     vagrant plugin install vagrant-aws
@@ -21,12 +22,6 @@ Log in with `vagrant ssh`.
 
 
 #### HowTo
-
-##### Set the S3 bucket name which serves as the new FreeBSD repository?
-
-In `site.yml`.
-
-    s3_bucket_name: 'YOUR_S3_BUCKET_NAME'
 
 ##### Change the private key which is used to sign the packages?
 
