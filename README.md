@@ -50,7 +50,7 @@ Configure the playbook (`site.yml`) to use your own packages list.
 
 Options for you build can be set easily by creating your own `make.conf` file.
 
-    cat <<EOF >> files/make.conf
+    cat <<EOF >> ./files/make.conf
     OPTIONS_UNSET+= DOCS NLS X11 EXAMPLES
     EOF
     
