@@ -22,6 +22,12 @@ Log in with `vagrant ssh`.
 
 #### HowTo
 
+##### Set the S3 bucket name which serves as the new FreeBSD repository?
+
+In `site.yml`.
+
+    s3_bucket_name: 'YOUR_S3_BUCKET_NAME'
+
 ##### Change the private key which is used to sign the packages?
 
 First you need to create a new key pair. 
