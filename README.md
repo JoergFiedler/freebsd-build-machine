@@ -24,11 +24,11 @@ Log in with `vagrant ssh`.
 
 ### Change the private key which is used to sign the packages?
 
-First you need to create a new key pair. 
+First you need to create a new key pair.
 
     openssl genrsa -out files/poudriere.key 4096
     openssl rsa -in files/poudriere.key -pubout -out files/poudriere.key.pub
-    
+
 Add the newly create private key to your playbook (`site.yml`).
 
     poudriere_key_file: './files/poudriere.key'
@@ -53,7 +53,7 @@ Options for you build can be set easily by creating your own `make.conf` file.
     cat <<EOF >> ./files/make.conf
     OPTIONS_UNSET+= DOCS NLS X11 EXAMPLES
     EOF
-    
+
 Add the file to the playbook (`site.yml`).
 
     poudriere_build_options_file: './files/make.conf'

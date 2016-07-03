@@ -8,7 +8,7 @@
     aws_default_region: '{{ lookup("env","DEFAULT_REGION") }}'
     s3_bucket_name: '{{ lookup("env","S3_BUCKET_NAME") }}'
     poudriere_jails:
-    - { jail_name: 'freebsd-10_3_x64', version: '10.3-RELEASE' }
+    - { jail_name: 'freebsd-10_2_x64', version: '10.2-RELEASE' }
 
   roles:
   - { role: JoergFiedler.freebsd-build-server }
