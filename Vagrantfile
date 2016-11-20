@@ -24,9 +24,9 @@ Vagrant.configure(2) do |config|
   config.vm.provider :aws do |aws, override|
     override.ssh.username = 'ec2-user'
 
-    aws.access_key_id = ENV['ACCESS_KEY']
-    aws.secret_access_key = ENV['SECRET_ACCESS_KEY']
-    aws.region = ENV['DEFAULT_REGION']
+    aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+    aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+    aws.region = ENV['AWS_DEFAULT_REGION']
     aws.keypair_name = 'ec2-user'
     aws.instance_type = 'm3.xlarge'
     aws.user_data = "#!/bin/sh\necho 'pass all keep state' >> /etc/pf.conf\necho pf_enable=YES >> /etc/rc.conf\necho pflog_enable=YES >> /etc/rc.conf\necho 'firstboot_pkgs_list=\"sudo bash python27\"' >> /etc/rc.conf\necho 'ifconfig_xn0=\"SYNCDHCP -tso\"' >> /etc/rc.conf\nmkdir -p /usr/local/etc/sudoers.d\necho 'ec2-user ALL=(ALL) NOPASSWD: ALL' >> /usr/local/etc/sudoers.d/ec2-user"

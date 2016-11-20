@@ -1,0 +1,6 @@
+www/nginx
+net-p2p/btsync
+security/cyrus-sasl2-saslauthd
+mail/postfix-sasl
+mail/cyrus-imapd25
+
