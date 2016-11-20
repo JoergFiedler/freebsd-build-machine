@@ -6,10 +6,11 @@ Creates a FreeBSD server which provides a ready to run `poudriere` installation.
 
 ## Quickstart
 
-    export ACCESS_KEY='your key'
-    export SECRET_ACCESS_KEY='your secret'
-    export DEFAULT_REGION='the aws region to use'
+    export AWS_ACCESS_KEY='your key'
+    export AWS_SECRET_ACCESS_KEY='your secret'
+    export AWS_DEFAULT_REGION='the aws region to use'
     export S3_BUCKET_NAME='the S3 bucket name'
+    export POUDRIERE_KEY_FILE='the key file to use for package signing'
 
     ansible-galaxy install JoergFiedler.freebsd-build-server,1.0.0
     vagrant plugin install vagrant-aws
