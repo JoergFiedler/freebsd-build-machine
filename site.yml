@@ -12,6 +12,7 @@
     poudriere_jails:
     - { jail_name: 'freebsd-10_3_x64', version: '10.3-RELEASE' }
     - { jail_name: 'freebsd-11_0_x64', version: '11.0-RELEASE' }
+    - { jail_name: 'freebsd-11_1_x64', version: '11.1-RELEASE' }
 
   roles:
   - { role: JoergFiedler.freebsd-build-server }

@@ -1,5 +1,5 @@
 Vagrant.configure(2) do |config|
-  config.vm.box = 'JoergFiedler/freebsd-11.0'
+  config.vm.box = 'JoergFiedler/freebsd-11.1'
   config.vm.box_check_update = false
 
   config.vm.synced_folder '.', '/vagrant', disabled: true
@@ -25,8 +25,14 @@ Vagrant.configure(2) do |config|
     aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
     aws.region = ENV['AWS_DEFAULT_REGION']
     aws.keypair_name = 'ec2-user'
-    aws.instance_type = 'm3.2xlarge'
-    aws.user_data = "#!/bin/sh\necho 'pass all keep state' >> /etc/pf.conf\necho pf_enable=YES >> /etc/rc.conf\necho pflog_enable=YES >> /etc/rc.conf\necho 'firstboot_pkgs_list=\"sudo bash python27\"' >> /etc/rc.conf\nmkdir -p /usr/local/etc/sudoers.d\necho 'ec2-user ALL=(ALL) NOPASSWD: ALL' >> /usr/local/etc/sudoers.d/ec2-user"
+    aws.instance_type = 'c3.xlarge'
+    aws.user_data = "#!/bin/sh
+echo 'pass all keep state' >> /etc/pf.conf
+echo pf_enable=YES >> /etc/rc.conf
+echo pflog_enable=YES >> /etc/rc.conf
+echo 'firstboot_pkgs_list=\"sudo bash python27\"' >> /etc/rc.conf
+mkdir -p /usr/local/etc/sudoers.d
+echo 'ec2-user ALL=(ALL) NOPASSWD: ALL' >> /usr/local/etc/sudoers.d/ec2-user"
     aws.block_device_mapping = [
       { 'DeviceName' => '/dev/sda1',
         'Ebs.VolumeSize' => 20,
