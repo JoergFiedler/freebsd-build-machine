@@ -25,7 +25,10 @@ Vagrant.configure(2) do |config|
     aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
     aws.region = ENV['AWS_DEFAULT_REGION']
     aws.keypair_name = 'ec2-user'
-    aws.instance_type = 'c3.xlarge'
+    aws.subnet_id = 'subnet-107d8167'
+    aws.associate_public_ip = true
+    aws.ssh_host_attribute = ':public_ip_address'
+    aws.instance_type = 'c5.xlarge'
     aws.user_data = "#!/bin/sh
 echo 'pass all keep state' >> /etc/pf.conf
 echo pf_enable=YES >> /etc/rc.conf
