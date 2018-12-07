@@ -1,5 +1,5 @@
 Vagrant.configure(2) do |config|
-  config.vm.box = 'JoergFiedler/freebsd-11.1'
+  config.vm.box = 'JoergFiedler/freebsd-11.2'
   config.vm.box_check_update = false
 
   config.vm.synced_folder '.', '/vagrant', disabled: true
