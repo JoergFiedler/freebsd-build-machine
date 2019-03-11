@@ -12,7 +12,7 @@ script:
 - ansible-galaxy install -fp ./ -r .requirements.yml
 - vagrant box add JoergFiedler/FreeBSD-11.2 --provider aws
 - vagrant up --provider aws
-- vagrant ssh -c "sudo build-ports && sudo upload-to-s3"
+- vagrant ssh -c "sudo build-ports -y && sudo upload-to-s3"
 after_script:
 - vagrant destroy -f
 env:
