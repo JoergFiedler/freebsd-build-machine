@@ -2,7 +2,7 @@
 
 Creates a FreeBSD server which provides a ready to run `poudriere` installation. See [FreeBSD Handbook](https://www.freebsd.org/doc/handbook/ports-poudriere.html) for further information on how to use `poudriere`.
 
-[This Ansible role](https://github.com/JoergFiedler/freebsd-build-server) is used to setup the server on EC2 or Virtualbox.
+[This Ansible role](https://github.com/JoergFiedler/freebsd-build-server) is used to setup the server on AWS EC2 or VirtualBox.
 
 ## Quickstart
 
@@ -12,7 +12,7 @@ Creates a FreeBSD server which provides a ready to run `poudriere` installation.
     export S3_BUCKET_NAME='the S3 bucket name'
     export POUDRIERE_KEY_FILE='the key file to use for package signing'
 
-    ansible-galaxy install JoergFiedler.freebsd-build-server,1.1.0
+    ansible-galaxy install JoergFiedler.freebsd-build-server,1.1.1
     vagrant plugin install vagrant-aws
     vagrant up --provider aws
 
@@ -64,8 +64,6 @@ Add the file to the playbook (`site.yml`).
 Add more entries to the list of jails `poudriere_jails` in you playbook (`site.yml`).
 
     poudriere_jails:
-      - { jail_name: 'freebsd-10_1_x64', version: '10.1-RELEASE' }
-      - { jail_name: 'freebsd-10_2_x64', version: '10.2-RELEASE' }
-      - { jail_name: 'freebsd-10_3_x64', version: '10.3-RELEASE' }
+      - { jail_name: 'freebsd-11_2_x64', version: '11.2-RELEASE' }
 
 The configuration above instructs poudriere to create packages for the three versions (10.1, 10.2, 10.3) of FreeBSD.
