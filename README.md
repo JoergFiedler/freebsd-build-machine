@@ -12,8 +12,9 @@ Creates a FreeBSD server which provides a ready to run `poudriere` installation.
     export S3_BUCKET_NAME='the S3 bucket name'
     export POUDRIERE_KEY_FILE='the key file to use for package signing'
 
-    ansible-galaxy install JoergFiedler.freebsd-build-server,1.1.1
+    ansible-galaxy install JoergFiedler.freebsd-build-server,1.1.2
     vagrant plugin install vagrant-aws
+    vagrant box add JoergFiedler/freebsd-11.2 --provider aws
     vagrant up --provider aws
 
 Log in with `vagrant ssh`.
