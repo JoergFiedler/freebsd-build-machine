@@ -1,9 +1,1 @@
-mail/postfix
-mail/ssmtp
 net-p2p/rslsync
-security/ca_root_nss
-security/cyrus-sasl2-saslauthd
-sysutils/iocage
-sysutils/tarsnap
-sysutils/tmux
-sysutils/zfs-periodic

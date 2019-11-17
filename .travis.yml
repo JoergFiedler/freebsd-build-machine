@@ -10,7 +10,7 @@ before_script:
 - ssh-keygen -y -f ~/.vagrant.d/insecure_private_key > ~/.vagrant.d/insecure_private_key.pub
 script:
 - ansible-galaxy install -fp ./ -r .requirements.yml
-- vagrant box add JoergFiedler/FreeBSD-11.2 --provider aws
+- vagrant box add JoergFiedler/FreeBSD-12 --provider aws
 - vagrant up --provider aws
 - vagrant ssh -c "sudo build-ports -y && sudo upload-to-s3"
 after_script:

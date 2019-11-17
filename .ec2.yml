@@ -1,7 +1,6 @@
 # ec2 specific settings
 
-host_ioc_zpool_devices: 'nvd1' # device settings used when creating the pool
-host_srv_zpool_devices: 'nvd1' # device settings used when creating the pool
+poudriere_zpool: 'zpool'
+poudriere_zpool_devices: '/dev/nvd1'
 
-host_sshd_user: 'ec2-user'
 sshd_user: 'ec2-user'

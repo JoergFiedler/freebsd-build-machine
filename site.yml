@@ -9,10 +9,12 @@
     s3_bucket_name: '{{ lookup("env","S3_BUCKET_NAME") }}'
     poudriere_build_options_file: 'make.conf'
     poudriere_ports_list_file: './files/ports.list'
-    poudriere_ports_branch_name: 'branches/2019Q1'
+    poudriere_ports_branch_name: 'branches/2019Q4'
     poudriere_key_file: '{{ lookup("env","POUDRIERE_KEY_FILE") }}'
+    poudriere_zpool: 'zpool'
     poudriere_jails:
-    - { jail_name: 'freebsd-11_2_x64', version: '11.2-RELEASE' }
+    - { jail_name: 'freebsd-11_3_x64', version: '11.3-RELEASE' }
+    - { jail_name: 'freebsd-12_1_x64', version: '12.1-RELEASE' }
 
   roles:
-  - JoergFiedler.freebsd-build-server
+    - JoergFiedler.freebsd-build-server
