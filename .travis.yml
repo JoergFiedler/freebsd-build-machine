@@ -1,26 +1,28 @@
+language: ruby
+rvm:
+  - 2.6
 dist: bionic
-language: python
 install:
-- wget https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.deb
-- sudo dpkg -i vagrant_2.2.4_x86_64.deb
-- pip install -r .requirements.txt
+  - wget https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.deb
+  - sudo dpkg -i vagrant_2.2.4_x86_64.deb
+  - wget https://github.com/bdwyertech/vagrant-aws/releases/download/v0.8.0-bdwyertech/vagrant-aws-0.8.0.gem
+  - vagrant plugin install vagrant-aws-0.8.0.gem
+  - pip install -r .requirements.txt
 before_script:
-- vagrant plugin install vagrant-aws
-- ssh-keygen -y -f ~/.vagrant.d/insecure_private_key > ~/.vagrant.d/insecure_private_key.pub
+  - openssl aes-256-cbc -K $encrypted_c25612d8b4fd_key -iv $encrypted_c25612d8b4fd_iv -in poudriere.key.enc -out files/poudriere.key -d
+  - ssh-keygen -y -f ~/.vagrant.d/insecure_private_key > ~/.vagrant.d/insecure_private_key.pub
 script:
-- ansible-galaxy install -fp ./ -r .requirements.yml
-- vagrant box add JoergFiedler/FreeBSD-12 --provider aws
-- vagrant up --provider aws
-- vagrant ssh -c "sudo build-ports -y && sudo upload-to-s3"
+  - ansible-galaxy install -fp ./ -r .requirements.yml
+  - vagrant box add JoergFiedler/FreeBSD-12 --provider aws
+  - vagrant up --provider aws --no-provision
+  - travis_wait 30 vagrant provision
+  - vagrant ssh -c "sudo build-ports -y && sudo upload-to-s3"
 after_script:
-- vagrant destroy -f
+  - vagrant destroy -f
 env:
   global:
-  - POUDRIERE_KEY_FILE=poudriere.key
-  - AWS_DEFAULT_REGION=eu-west-1
-  - S3_BUCKET_NAME=travis.moumantai.de
-  - secure: BPfb4DBqCrheUsliaKDGsJ+JuH2O+Wi1qfH37flDTzVX0iUlqWLctdaa6YRxsmabFoAKLSitwsy3VSgmEuOuLd5BcfYLQLPLrYhyu2MSkZPcD9KpRGYALhQqMTX3vyeyBZkVpA513OtOYS33P3RbPnptNu8mcJ8UZ/nmAdQ4vLFisfFr7Y3u0tUp3s5+lzd2BnVNQytJCcJB+ZYdm4oZjDdmVTQiEv+Yr3ohHCbcQTfFXicWz4CrIw9HbwBEcr1Tvl8IyWCEt4PKQma6iQjG8KIttUe+Qc20MtOGXr5NgNOTXpjrKJz6OFSREpzkpsd/xEOn1EApdGcSWboYi8S+qXU1t/VIvI77tBC1gJEYr+icfB6dhR8hz9RqNmTdZCUQa0ZqbmB20HJAgiDUsV+Q6x5JHBGnvBLtFuFu3t4jpn8t8rUwBfIcJZT36jnTaUmSAYlfBoo0QUgB9s8oHvk9w3jKuwfGM+15vCSo8MB4kXvjZogWAi110ocdnEOb7vn4ght10iC2f+PYH8GhaY+VcKELB87gY3fpN2FTD6twwxlBHxsdG6ZWyDoO8k1Y4VEGp02Y5oLGuBWTCi9zqp4UNQfY7Mj/7EjasJfBbFS8ZWOrdAvmvTobu4di+Hdhxu6iN4EBs83h6d25bAT0uoVGYcPdj37PyW1ZyoOtZhhNQDM=
-  - secure: V3ubPQTHz7EsgJVa1lT/kgotWS73z4A5ug5wSM5mfJ6i1LvcxpynteT2mMmW0P/4rNpd+/sIfz/terjrmThv077qtN+VHPSNEmHuuU3WvlSMf7fhjoUUyym4THmJ1cxMT7HxLhcwzbFGU0I1wBkzOE687bT7C9lBRtFG0RTknYbU6n4cdsSi8xSoqRMk55skCSOQZQNm+5UvlBq/gIBKXWIpyd+CEwfnWXZ+ZanSR0iHmMxRjMBUsGxYKP87UW4rU6UyjjpY9WHJZjRK0iDBCvJobYaGCUw+1qsqAV/BecrcchkDjBM3hcjSNHw3gYZU//58zAeFWHoy0RGNnK6MSRqbeX1DFPmqdi5QAcXSRx2n1aSn1wmqWHPho6s559THu9bR9KJiDU7Qg6wU32ZSXI42LuxJkcJ59kOGZWpH2tnvlOvo6mjqQMCeOniOes8kohkiRj48kV1FS2ppSV9sf3ZuN/MuSzGwEBoGtojb/z3JNveFU130mUf2QPh5GRrAv10yMABDQdSXqaw6RTijgcH84+mZdatTQkgrfpJzgx2ZCnp6Rxj5GTfD47LPOGpqyN2rGfrnhT+H5Ji0AQzUqLNo/byWJjVQOczdWj9aHcjVT0RmEkVSvtOnHdWe4n+RthwFbHWbuxV1WdQv50XWqt/B+nzEfq1tnonEmcRU/Hs=
-before_install:
-- openssl aes-256-cbc -K $encrypted_c25612d8b4fd_key -iv $encrypted_c25612d8b4fd_iv
-  -in poudriere.key.enc -out files/poudriere.key -d
+    - POUDRIERE_KEY_FILE=poudriere.key
+    - AWS_DEFAULT_REGION=eu-west-1
+    - S3_BUCKET_NAME=travis.moumantai.de
+    - secure: BPfb4DBqCrheUsliaKDGsJ+JuH2O+Wi1qfH37flDTzVX0iUlqWLctdaa6YRxsmabFoAKLSitwsy3VSgmEuOuLd5BcfYLQLPLrYhyu2MSkZPcD9KpRGYALhQqMTX3vyeyBZkVpA513OtOYS33P3RbPnptNu8mcJ8UZ/nmAdQ4vLFisfFr7Y3u0tUp3s5+lzd2BnVNQytJCcJB+ZYdm4oZjDdmVTQiEv+Yr3ohHCbcQTfFXicWz4CrIw9HbwBEcr1Tvl8IyWCEt4PKQma6iQjG8KIttUe+Qc20MtOGXr5NgNOTXpjrKJz6OFSREpzkpsd/xEOn1EApdGcSWboYi8S+qXU1t/VIvI77tBC1gJEYr+icfB6dhR8hz9RqNmTdZCUQa0ZqbmB20HJAgiDUsV+Q6x5JHBGnvBLtFuFu3t4jpn8t8rUwBfIcJZT36jnTaUmSAYlfBoo0QUgB9s8oHvk9w3jKuwfGM+15vCSo8MB4kXvjZogWAi110ocdnEOb7vn4ght10iC2f+PYH8GhaY+VcKELB87gY3fpN2FTD6twwxlBHxsdG6ZWyDoO8k1Y4VEGp02Y5oLGuBWTCi9zqp4UNQfY7Mj/7EjasJfBbFS8ZWOrdAvmvTobu4di+Hdhxu6iN4EBs83h6d25bAT0uoVGYcPdj37PyW1ZyoOtZhhNQDM=
+    - secure: V3ubPQTHz7EsgJVa1lT/kgotWS73z4A5ug5wSM5mfJ6i1LvcxpynteT2mMmW0P/4rNpd+/sIfz/terjrmThv077qtN+VHPSNEmHuuU3WvlSMf7fhjoUUyym4THmJ1cxMT7HxLhcwzbFGU0I1wBkzOE687bT7C9lBRtFG0RTknYbU6n4cdsSi8xSoqRMk55skCSOQZQNm+5UvlBq/gIBKXWIpyd+CEwfnWXZ+ZanSR0iHmMxRjMBUsGxYKP87UW4rU6UyjjpY9WHJZjRK0iDBCvJobYaGCUw+1qsqAV/BecrcchkDjBM3hcjSNHw3gYZU//58zAeFWHoy0RGNnK6MSRqbeX1DFPmqdi5QAcXSRx2n1aSn1wmqWHPho6s559THu9bR9KJiDU7Qg6wU32ZSXI42LuxJkcJ59kOGZWpH2tnvlOvo6mjqQMCeOniOes8kohkiRj48kV1FS2ppSV9sf3ZuN/MuSzGwEBoGtojb/z3JNveFU130mUf2QPh5GRrAv10yMABDQdSXqaw6RTijgcH84+mZdatTQkgrfpJzgx2ZCnp6Rxj5GTfD47LPOGpqyN2rGfrnhT+H5Ji0AQzUqLNo/byWJjVQOczdWj9aHcjVT0RmEkVSvtOnHdWe4n+RthwFbHWbuxV1WdQv50XWqt/B+nzEfq1tnonEmcRU/Hs=
