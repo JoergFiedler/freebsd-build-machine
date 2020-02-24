@@ -1,3 +1,2 @@
 - src: 'git+https://github.com/JoergFiedler/freebsd-build-server.git'
-  version: 'v1.1.4'
   name: 'JoergFiedler.freebsd-build-server'
