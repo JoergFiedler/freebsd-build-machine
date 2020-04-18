@@ -17,6 +17,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.galaxy_roles_path = ENV['ANSIBLE_ROLES_PATH'] || '../'
     ansible.tags = ENV['ANSIBLE_TAGS']
     ansible.skip_tags = ENV['ANSIBLE_SKIP_TAGS']
+    ansible.host_vars = {
+        "127.0.0.1" => {"ansible_python_interpreter" => '/usr/bin/python'},
+    }
     ansible.verbose = ENV['ANSIBLE_VERBOSE']
   end
 
