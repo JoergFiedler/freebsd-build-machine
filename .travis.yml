@@ -16,7 +16,7 @@ script:
   - vagrant box add JoergFiedler/FreeBSD-12 --provider aws
   - vagrant up --provider aws --no-provision
   - travis_wait 30 vagrant provision
-  - vagrant ssh -c "sudo build-ports -y && sudo upload-to-s3"
+#  - travis_wait 120 vagrant ssh -c "sudo build-ports -y && sudo upload-to-s3"
 after_script:
   - vagrant destroy -f
 env:
