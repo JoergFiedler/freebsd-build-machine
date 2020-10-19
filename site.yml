@@ -13,7 +13,6 @@
     poudriere_key_file: '{{ lookup("env","POUDRIERE_KEY_FILE") }}'
     poudriere_zpool: 'tank'
     poudriere_jails:
-    - { jail_name: 'freebsd-11_3_x64', version: '11.3-RELEASE' }
     - { jail_name: 'freebsd-12_1_x64', version: '12.1-RELEASE' }
 
   roles:
