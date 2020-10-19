@@ -1,3 +1,5 @@
 net-p2p/rslsync
 security/cyrus-sasl2-saslauthd
 mail/postfix
+mail/cyrus-imapd25
+mail/cyrus-imapd32
