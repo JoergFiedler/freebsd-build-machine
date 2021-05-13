@@ -3,10 +3,9 @@ rvm:
   - 2.6
 dist: bionic
 install:
-  - wget https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.deb
-  - sudo dpkg -i vagrant_2.2.4_x86_64.deb
-  - wget https://github.com/bdwyertech/vagrant-aws/releases/download/v0.8.0-bdwyertech/vagrant-aws-0.8.0.gem
-  - vagrant plugin install vagrant-aws-0.8.0.gem
+  - wget https://releases.hashicorp.com/vagrant/${VAGRANT_VERSION}/vagrant_${VAGRANT_VERSION}_x86_64.deb
+  - sudo dpkg -i vagrant_${VAGRANT_VERSION}_x86_64.deb
+  - vagrant plugin install vagrant-aws-mkubenka --plugin-version "0.7.2.pre.24"
   - pip install -r .requirements.txt
 before_script:
   - openssl aes-256-cbc -K $encrypted_c25612d8b4fd_key -iv $encrypted_c25612d8b4fd_iv -in poudriere.key.enc -out files/poudriere.key -d
